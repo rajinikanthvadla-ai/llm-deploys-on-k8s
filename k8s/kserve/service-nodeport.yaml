@@ -1,0 +1,16 @@
+# Optional: expose KServe predictor via NodePort after InferenceService is Ready.
+# The predictor Service name is derived from the InferenceService name.
+apiVersion: v1
+kind: Service
+metadata:
+  name: tiny-llm-nodeport
+  namespace: kserve-lab
+spec:
+  type: NodePort
+  selector:
+    serving.kserve.io/inferenceservice: tiny-llm
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+      nodePort: 30081

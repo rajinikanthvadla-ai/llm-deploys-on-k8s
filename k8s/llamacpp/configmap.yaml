@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: llamacpp-config
+  namespace: llm
+data:
+  # Default: small chat model (~670 MB). Override at deploy time for your own GGUF.
+  MODEL_URL: "https://huggingface.co/TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF/resolve/main/tinyllama-1.1b-chat-v1.0.Q4_K_M.gguf"
+  MODEL_FILE: "model.gguf"
+  # Set LORA_URL to deploy a fine-tuned adapter on top of the base model (optional).
+  LORA_URL: ""
+  LORA_FILE: "adapter.gguf"
+  SERVER_PORT: "8080"
+  CONTEXT_SIZE: "2048"
+  N_GPU_LAYERS: "0"

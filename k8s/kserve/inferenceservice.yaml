@@ -1,0 +1,21 @@
+# Minimal KServe example: tiny HuggingFace causal LM (CPU-friendly).
+# Requires KServe CRDs/controller installed (see scripts/install-kserve.sh).
+apiVersion: serving.kserve.io/v1beta1
+kind: InferenceService
+metadata:
+  name: tiny-llm
+  namespace: kserve-lab
+spec:
+  predictor:
+    model:
+      modelFormat:
+        name: huggingface
+      runtime: kserve-huggingfaceserver
+      storageUri: "hf://distilgpt2"
+      resources:
+        requests:
+          cpu: "500m"
+          memory: "1Gi"
+        limits:
+          cpu: "2"
+          memory: "2Gi"
